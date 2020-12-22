@@ -23,7 +23,7 @@ namespace Grafos
             grafos.AddArista(0, 3, 1);
             grafos.AddArista(1, 3, 3);
             grafos.AddArista(1, 4, 10);
-            grafos.AddArista(2, 0, 4);
+            grafos.AddArista(2, 0, 4); 
             grafos.AddArista(2, 5, 5);
             grafos.AddArista(3, 2, 2);
             grafos.AddArista(3, 4, 2);
@@ -33,6 +33,7 @@ namespace Grafos
             grafos.AddArista(6, 5, 1);
 
             grafos.Show();//muestra el estado inicial del grafo
+            
 
 
             /*a continuacion se crea la tabla
