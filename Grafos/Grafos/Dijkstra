@@ -137,7 +137,7 @@ namespace Grafos
 
             Adyacencia = new int[nodo, nodo];
 
-            indegree = new int[nodo];
+            
 
         }
         public void AddArista(int nInicial, int nFinal) 
