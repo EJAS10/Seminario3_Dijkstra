@@ -6,9 +6,9 @@ namespace Grafos
     {
         static void Main(string[] args)
         {
-            
+            AlgoritmoDijksra();
         }
-        private static void AlgoritmoDijksra(int inicio, int final)//recibe por parametro el nodo de inicio y el nodo final
+        private static void AlgoritmoDijksra()//recibe por parametro el nodo de inicio y el nodo final
         {
 
             int distancia = 0;//distancia entre los nodos
@@ -34,7 +34,10 @@ namespace Grafos
 
             grafos.Show();//muestra el estado inicial del grafo
 
-
+            Console.WriteLine("introduce el nodo de inicio");
+            int inicio = int.Parse(Console.ReadLine());
+            Console.WriteLine("Introduce el nodo final");
+            int final = int.Parse(Console.ReadLine());
             /*a continuacion se crea la tabla
             0 visitado
             1 distancia
@@ -62,10 +65,10 @@ namespace Grafos
             {
                 //marcar el nodo como visitado
                 tabla[actual, 0] = 1;
-                for(columna=0; columna<cantNodos; columna++)
+                for (columna = 0; columna < cantNodos; columna++)
                 {
                     //a quien se dirige
-                    if(grafos.ObtenerAdyacencia(actual,columna) != 0)
+                    if (grafos.ObtenerAdyacencia(actual, columna) != 0)
                     {
                         //distancia 
                         distancia = grafos.ObtenerAdyacencia(actual, columna) + tabla[actual, 1];
@@ -75,7 +78,7 @@ namespace Grafos
 
                             //colocamos la informacion de origen padre
                             tabla[columna, 2] = actual;
-                        } 
+                        }
                     }
                 }
 
@@ -83,22 +86,22 @@ namespace Grafos
                 int indiceMenor = -1;
                 int distanciamenor = int.MaxValue;
 
-                for (int x = 0; x< cantNodos; x++)
+                for (int x = 0; x < cantNodos; x++)
                 {
-                    if (tabla[x, 1]< distanciamenor && tabla[x, 0] == 0)
+                    if (tabla[x, 1] < distanciamenor && tabla[x, 0] == 0)
                     {
                         indiceMenor = x;
                         distanciamenor = tabla[x, 1];
                     }
                 }
                 actual = indiceMenor;
-            } while(actual != -1);
+            } while (actual != -1);
 
             MostrarTabla(tabla);
 
             //Ruta mas corta
             List<int> ruta = new List<int>();
-            int nodo= final;
+            int nodo = final;
             while (nodo != inicio)
             {
                 ruta.Add(nodo);
@@ -113,23 +116,23 @@ namespace Grafos
 
             Console.WriteLine();
         }
-        public static void MostrarTabla(int [,] pTabla)//metodo para mostrar la tabla de dijkstra
+        public static void MostrarTabla(int[,] pTabla)//metodo para mostrar la tabla de dijkstra
         {
-           
-            for (int n=0; n< pTabla.GetLength(0); n++)
+
+            for (int n = 0; n < pTabla.GetLength(0); n++)
             {
-                Console.WriteLine($"{n}-> {pTabla[n,0]}\t{pTabla[n,1]}\t{pTabla[n,2]}");
+                Console.WriteLine($"{n}-> {pTabla[n, 0]}\t{pTabla[n, 1]}\t{pTabla[n, 2]}");
             }
             Console.WriteLine("----------------");
         }
 
-        
-       
+
+
     }//fin de la clase Program////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     class Grafos
     {
-        int [,] Adyacencia;
+        int[,] Adyacencia;
         int nodo;
         public Grafos(int pNodo)
         {
@@ -137,39 +140,35 @@ namespace Grafos
 
             Adyacencia = new int[nodo, nodo];
 
-            indegree = new int[nodo];
+
 
         }
-        public void AddArista(int nInicial, int nFinal) 
+        
+        public void AddArista(int nInicial, int nFinal, int peso)
         {
-            Adyacencia[nInicial, nFinal] = 1;
-
-        }
-        public void AddArista(int nInicial,int nFinal, int peso) 
-        {
-            Adyacencia[nInicial, nFinal]= peso;
+            Adyacencia[nInicial, nFinal] = peso;
         }
 
         public void Show()
         {
-            int col=0;
-            int fil=0;
+            int col = 0;
+            int fil = 0;
 
             Console.ForegroundColor = ConsoleColor.Red;
-            for(col=0; col<nodo; col++)
+            for (col = 0; col < nodo; col++)
             {
                 Console.Write($"\t     {col}");
             }
             Console.WriteLine();
 
-            for(col=0; col< nodo; col++)
+            for (col = 0; col < nodo; col++)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write($"\t{col}");
-                for(fil=0; fil<nodo; fil++)
+                for (fil = 0; fil < nodo; fil++)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write($"\t{Adyacencia[col,fil]}");
+                    Console.Write($"\t{Adyacencia[col, fil]}");
                 }
                 Console.WriteLine();
             }
